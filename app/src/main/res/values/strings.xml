@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HardTraining</string>
+    <string name="error_message">Error occurred while getting request!</string>
 </resources>

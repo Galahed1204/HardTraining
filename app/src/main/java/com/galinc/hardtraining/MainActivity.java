@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.galinc.hardtraining.itility.Post;
@@ -24,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String str =  "gettrainings";
-        String userCredentials = "guest:guest";
-        final String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
+    }
 
+    public void onClickDownload(View view){
+        String str =  "gettrainings";
         Post post1 = new Post();
         post1.setBody(str);
 
@@ -38,18 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Post>>() {
                     @Override
                     public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                        //Post post = response.body();
                         List<Post> posts = response.body();
-//                        textView.append(post.getId() + "\n");
-//                        textView.append(post.getUserId() + "\n");
-//                        textView.append(post.getTitle() + "\n");
-//                        textView.append(post.getBody() + "\n");
-
                     }
 
                     @Override
                     public void onFailure(Call<List<Post>> call, Throwable t) {
-                        textView.setText("Error occurred while getting request!");
+                        textView.setText(getResources().getText(R.string.error_message));
                         t.printStackTrace();
                     }
                 });
