@@ -8,8 +8,6 @@ import android.arch.persistence.room.Update;
 
 import com.galinc.hardtraining.itility.Exercise;
 
-import java.lang.annotation.Target;
-import java.lang.reflect.Method;
 import java.util.List;
 
 
