@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                         List<Post> posts = response.body();
-                        
+                        textView.setText(getResources().getText(R.string.app_name));
                     }
 
                     @Override

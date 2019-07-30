@@ -21,11 +21,14 @@ public interface ExerciseDao {
     Exercise getById(long id);
 
     @Insert
-    void insert(Exercise employee);
+    void insert(Exercise exercise);
+
+    @Insert
+    void insert(List<Exercise> exercises);
 
     @Update
-    void update(Exercise employee);
+    void update(Exercise exercise);
 
     @Delete
-    void delete(Exercise employee);
+    void delete(Exercise exercise);
 }
