@@ -1,5 +1,6 @@
 package com.galinc.hardtraining.net;
 
+import com.galinc.hardtraining.itility.Exercise;
 import com.galinc.hardtraining.itility.Post;
 
 import java.util.List;
@@ -13,14 +14,14 @@ import retrofit2.http.Query;
 
 public interface JSONPlaceHolderApi {
     @GET("/posts/{id}")
-    public Call<Post> getPostWithID(@Path("id") int id);
+    public Call<Exercise> getPostWithID(@Path("id") int id);
 
     @GET("/posts")
-    public Call<List<Post>> getAllPosts();
+    public Call<List<Exercise>> getAllPosts();
 
     @GET("/posts")
-    public Call<List<Post>> getPostOfUser(@Query("userId") int id);
+    public Call<List<Exercise>> getPostOfUser(@Query("userId") int id);
 
     @POST("/hardtraining/hs/ht/main/call/")
-    public Call<List<Post>> postData(@Body Post data);
+    public Call<List<Exercise>> postData(@Body Post data);
 }

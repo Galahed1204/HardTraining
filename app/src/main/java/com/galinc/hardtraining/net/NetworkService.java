@@ -1,5 +1,7 @@
 package com.galinc.hardtraining.net;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,7 +16,10 @@ public class NetworkService {
     private NetworkService(){
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor("guest", "guest"))
-                .build();
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60,TimeUnit.SECONDS)
+                .build()
+                ;
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
