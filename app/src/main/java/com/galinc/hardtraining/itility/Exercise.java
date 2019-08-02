@@ -15,6 +15,10 @@ public class Exercise {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
+    @SerializedName("guid")
+    @Expose
+    public String guid;
+
     public String getTitle() {
         return title;
     }

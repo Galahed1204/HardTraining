@@ -10,8 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
     private static NetworkService mInstance;
-    public static final String BASE_URL = "http://172.31.255.165/test/hs/api/";
+    private static final String BASE_URL = "http://172.31.255.165/test/hs/api/";
     private Retrofit mRetrofit;
+    public static final String GET_EXERCISES = "getexercises";
 
     private NetworkService(){
         OkHttpClient client = new OkHttpClient.Builder()

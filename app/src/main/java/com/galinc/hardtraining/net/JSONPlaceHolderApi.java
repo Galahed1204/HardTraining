@@ -24,4 +24,8 @@ public interface JSONPlaceHolderApi {
 
     @POST("/hardtraining/hs/ht/main/call/")
     public Call<List<Exercise>> postData(@Body Post data);
+
+    @POST("/hardtraining/hs/ht/main/call/")
+    public Call<List<Exercise>> postData(@Body String data);
+
 }

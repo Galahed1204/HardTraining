@@ -1,5 +1,6 @@
 package com.galinc.hardtraining;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -36,28 +37,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickDownload(View view){
-        String str =  "gettrainings";
-        Post post1 = new Post();
-        post1.setBody(str);
-
         textView = findViewById(R.id.main_text);
         NetworkService.getInstance()
                 .getJSONApi()
-                .postData(post1)
+                .postData(NetworkService.GET_EXERCISES)
                 .enqueue(new Callback<List<Exercise>>() {
+                    @SuppressLint("CheckResult")
                     @Override
                     public void onResponse(Call<List<Exercise>> call, Response<List<Exercise>> response) {
                         List<Exercise> posts = response.body();
                         textView.setText(getResources().getText(R.string.app_name));
+
+                        if (posts != null)
                         Observable.fromCallable(new CallableLongAction(posts))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<Integer>() {
-                                    @Override
-                                    public void accept(Integer integer) throws Exception {
-                                        textView.append(integer.toString());
-                                    }
-                                });
+                                .subscribe(integer -> textView.append(integer.toString()));
+
                     }
 
                     @Override
@@ -75,13 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
         private final  List<Exercise> data;
 
-        public CallableLongAction( List<Exercise> data) {
+        private CallableLongAction( List<Exercise> data) {
             this.data = data;
         }
 
         @Override
         public Integer call() throws Exception {
-            //return longAction(data);
             AppDatabase db = MyApp.getInstance().getDatabase();
             db.exerciseDao().deleteAll();
             db.exerciseDao().insert(data);
