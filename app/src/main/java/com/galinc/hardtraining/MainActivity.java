@@ -1,6 +1,7 @@
 package com.galinc.hardtraining;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.galinc.hardtraining.db.AppDatabase;
 import com.galinc.hardtraining.itility.Exercise;
+import com.galinc.hardtraining.itility.ListTraining;
 import com.galinc.hardtraining.itility.Post;
 import com.galinc.hardtraining.net.NetworkService;
 
@@ -64,7 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    public void onClickGoToDocuments(View view) {
+        Intent intent = new Intent(this, ListTrainings.class);
+        startActivity(intent);
 
+    }
 
 
     class CallableLongAction implements Callable<Integer> {

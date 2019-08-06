@@ -3,4 +3,5 @@
     <string name="error_message">Error occurred while getting request!</string>
     <string name="title_activity_list_trainings">ListTrainings</string>
     <string name="button_download">Download directory</string>
+    <string name="go_to_documents">Go to documents</string>
 </resources>
