@@ -1,4 +1,4 @@
-package com.galinc.hardtraining;
+package com.galinc.hardtraining.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,21 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.galinc.hardtraining.MyApp;
+import com.galinc.hardtraining.R;
+import com.galinc.hardtraining.activity.ListTrainings;
 import com.galinc.hardtraining.db.AppDatabase;
 import com.galinc.hardtraining.itility.Exercise;
-import com.galinc.hardtraining.itility.ListTraining;
-import com.galinc.hardtraining.itility.Post;
 import com.galinc.hardtraining.net.NetworkService;
 
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;

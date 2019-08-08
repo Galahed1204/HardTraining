@@ -13,15 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ListTrainings"
+            android:name=".activity.ListTrainings"
             android:label="@string/title_activity_list_trainings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.galinc.hardtraining.MainActivity" />
+                android:value="com.galinc.hardtraining.activity.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

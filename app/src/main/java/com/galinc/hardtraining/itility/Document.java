@@ -13,5 +13,5 @@ public class Document {
 
     private String guid;
 
-    private long date;
+    private String date;
 }
