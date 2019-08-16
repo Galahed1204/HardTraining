@@ -1,5 +1,6 @@
 package com.galinc.hardtraining.recyclerview;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.galinc.hardtraining.R;
+import com.galinc.hardtraining.activity.TrainingActivity;
 import com.galinc.hardtraining.itility.Document;
 
 import java.util.List;
@@ -49,13 +51,13 @@ public class DataAdapterDocument extends RecyclerView.Adapter<DataAdapterDocumen
         holder.nameView.setText(document.getNumber());
         holder.dateView.setText(document.getDate());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(inflater.getContext()," " + position,Toast.LENGTH_LONG).show();
-                Document document1 = documents.get(position);
 
-            }
+
+        holder.itemView.setOnClickListener(v -> {
+            Toast.makeText(inflater.getContext()," " + position,Toast.LENGTH_LONG).show();
+            Document document1 = documents.get(position);
+            Intent intent = new Intent(holder.itemView.getContext(), TrainingActivity.class);
+
         });
         holder.nameView.setOnClickListener(
                 v -> {

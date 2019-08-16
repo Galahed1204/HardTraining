@@ -3,6 +3,8 @@ package com.galinc.hardtraining.itility;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity
 public class Document {
 
@@ -15,6 +17,10 @@ public class Document {
     private String guid;
 
     private String date;
+
+    //private List<ListTraining> listTrainings;
+
+
 
     public void setNumber(String number) {
         this.number = number;
