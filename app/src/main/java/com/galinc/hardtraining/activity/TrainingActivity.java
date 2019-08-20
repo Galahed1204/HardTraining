@@ -10,6 +10,7 @@ import android.view.View;
 import com.galinc.hardtraining.R;
 
 public class TrainingActivity extends AppCompatActivity {
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,9 @@ public class TrainingActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        id = getIntent().getLongExtra("id",0L);
+
+        FloatingActionButton fab = findViewById(R.id.fablt);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

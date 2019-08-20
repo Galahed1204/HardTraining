@@ -34,7 +34,7 @@ public class ListTraining {
     private int numberofitr;
 
     @Expose
-    private int weight;
+    private String weight;
 
     @NonNull
     @Expose
@@ -56,7 +56,7 @@ public class ListTraining {
         this.numberofitr = numberofitr;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
@@ -72,7 +72,7 @@ public class ListTraining {
         return numberofitr;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 

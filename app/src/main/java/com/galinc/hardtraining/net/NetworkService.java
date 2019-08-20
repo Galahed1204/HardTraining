@@ -19,7 +19,7 @@ public class NetworkService {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor("guest", "guest"))
                 .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60,TimeUnit.SECONDS)
+                .connectTimeout(10,TimeUnit.SECONDS)
                 .build()
                 ;
 

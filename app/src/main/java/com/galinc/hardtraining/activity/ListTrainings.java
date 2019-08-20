@@ -41,6 +41,8 @@ public class ListTrainings extends AppCompatActivity {
 
     List<Document> documents = new ArrayList<>();
     AppDatabase mDataBase = MyApp.getInstance().getDatabase();
+    DocumentWithTrainings document;
+    Disposable listDocuments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class ListTrainings extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final RecyclerView recyclerView = findViewById(R.id.list);
-        Disposable a = mDataBase.documentDao().getAllData()
+        listDocuments = mDataBase.documentDao().getAllData()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(documents -> {
                     this.documents = documents;
@@ -58,7 +60,8 @@ public class ListTrainings extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 });
 
-        DocumentWithTrainings document = mDataBase.documentDao().loadDocumentBy(2).getValue();
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             fab.setEnabled(false);
@@ -97,4 +100,9 @@ public class ListTrainings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    protected void onDestroy() {
+        listDocuments.dispose();
+        super.onDestroy();
+    }
 }
