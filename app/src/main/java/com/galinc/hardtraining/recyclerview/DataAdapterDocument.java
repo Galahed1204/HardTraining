@@ -53,13 +53,13 @@ public class DataAdapterDocument extends RecyclerView.Adapter<DataAdapterDocumen
 
 
 
-        holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(inflater.getContext()," " + position,Toast.LENGTH_LONG).show();
-            Document document1 = documents.get(position);
-            Intent intent = new Intent(holder.itemView.getContext(), TrainingActivity.class);
-
-        });
-        holder.nameView.setOnClickListener(
+//        holder.itemView.setOnClickListener(v -> {
+//            Toast.makeText(inflater.getContext()," " + position,Toast.LENGTH_LONG).show();
+//            Document document1 = documents.get(position);
+//            Intent intent = new Intent(holder.itemView.getContext(), TrainingActivity.class);
+//
+//        });
+        holder.itemView.setOnClickListener(
                 v -> {
 //                    Toast.makeText(inflater.getContext()," " + position,Toast.LENGTH_LONG).show();
                     long id = documents.get(position).id;
