@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import com.galinc.hardtraining.R;
 import com.galinc.hardtraining.db.AppDatabase;
 import com.galinc.hardtraining.itility.Document;
 import com.galinc.hardtraining.itility.DocumentWithTrainings;
+import com.galinc.hardtraining.itility.ListTraining;
 import com.galinc.hardtraining.net.NetworkService;
 import com.galinc.hardtraining.recyclerview.DataAdapterDocument;
 
@@ -44,6 +46,8 @@ public class ListTrainings extends AppCompatActivity {
     DocumentWithTrainings document;
     Disposable listDocuments;
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +65,9 @@ public class ListTrainings extends AppCompatActivity {
                 });
 
 
+        mSwipeRefreshLayout = findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            fab.setEnabled(false);
             NetworkService
                     .getInstance()
                     .getJSONApi()
@@ -86,16 +89,59 @@ public class ListTrainings extends AppCompatActivity {
                                         .subscribe();
 
                             }
-                            fab.setEnabled(true);
+                            mSwipeRefreshLayout.setRefreshing(false);
                         }
 
                         @Override
                         public void onFailure(Call<List<Document>> call, Throwable t) {
-                            Snackbar.make(view, t.toString(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                            fab.setEnabled(true);
+                            Snackbar.make(findViewById(R.id.swipe_container), t.toString(), Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            mSwipeRefreshLayout.setRefreshing(false);
                         }
                     });
+            Toast.makeText(ListTrainings.this, "onRefresh", Toast.LENGTH_LONG).show();
+
+
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+
+
+
+//            fab.setEnabled(false);
+//            //fab.setVisibility(FloatingActionButton.GONE);
+//            NetworkService
+//                    .getInstance()
+//                    .getJSONApi()
+//                    .postDocuments(NetworkService.GET_LISTOFTRAININGS)
+//                    .enqueue(new Callback<List<Document>>() {
+//                        @Override
+//                        public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
+//                            List<Document> post = response.body();
+//                            DataAdapterDocument adapter = new DataAdapterDocument(getLayoutInflater(), post);
+//                            recyclerView.setAdapter(adapter);
+//
+//                            if (post != null){
+//                                Completable.fromAction(() -> {
+//                                    mDataBase.documentDao().deleteAll();
+//                                    mDataBase.documentDao().insert(post);
+//
+//                                }).subscribeOn(Schedulers.io())
+//                                        .observeOn(AndroidSchedulers.mainThread())
+//                                        .subscribe();
+//
+//                            }
+//                            fab.setEnabled(true);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<List<Document>> call, Throwable t) {
+//                            Snackbar.make(view, t.toString(), Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+//                            fab.setEnabled(true);
+//                        }
+//                    });
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
