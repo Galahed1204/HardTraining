@@ -1,39 +1,28 @@
 package com.galinc.hardtraining.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
 import com.galinc.hardtraining.MyApp;
 import com.galinc.hardtraining.R;
 import com.galinc.hardtraining.db.AppDatabase;
 import com.galinc.hardtraining.itility.Document;
 import com.galinc.hardtraining.itility.DocumentWithTrainings;
-import com.galinc.hardtraining.itility.ListTraining;
 import com.galinc.hardtraining.net.NetworkService;
 import com.galinc.hardtraining.recyclerview.DataAdapterDocument;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,7 +88,7 @@ public class ListTrainings extends AppCompatActivity {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     });
-            Toast.makeText(ListTrainings.this, "onRefresh", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ListTrainings.this, "onRefresh", Toast.LENGTH_LONG).show();
 
 
         });
@@ -108,7 +97,7 @@ public class ListTrainings extends AppCompatActivity {
         fab.setOnClickListener(view -> {
 
 
-
+            startActivity(new Intent(this, NewTraining.class));
 //            fab.setEnabled(false);
 //            //fab.setVisibility(FloatingActionButton.GONE);
 //            NetworkService

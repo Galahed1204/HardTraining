@@ -14,11 +14,13 @@ import com.galinc.hardtraining.R;
 import com.galinc.hardtraining.activity.ListTrainings;
 import com.galinc.hardtraining.db.AppDatabase;
 import com.galinc.hardtraining.itility.Exercise;
+import com.galinc.hardtraining.itility.TemplateTraining;
 import com.galinc.hardtraining.net.NetworkService;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -28,6 +30,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
+    AppDatabase mDataBase = MyApp.getInstance().getDatabase();
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,33 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<List<Exercise>> call, Throwable t) {
+                        textView.setText(getResources().getText(R.string.error_message));
+                        t.printStackTrace();
+                    }
+                });
+
+        NetworkService.getInstance()
+                .getJSONApi()
+                .postTemplate(NetworkService.GET_TAMPLATE)
+                .enqueue(new Callback<List<TemplateTraining>>() {
+                    @SuppressLint("CheckResult")
+                    @Override
+                    public void onResponse(Call<List<TemplateTraining>> call, Response<List<TemplateTraining>> response) {
+                        List<TemplateTraining> posts = response.body();
+
+                        if (posts != null)
+                            Completable.fromAction(() -> {
+                                mDataBase.templateTrainingDao().deleteAll();
+                                mDataBase.templateTrainingDao().insert(posts);
+
+                            }).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TemplateTraining>> call, Throwable t) {
                         textView.setText(getResources().getText(R.string.error_message));
                         t.printStackTrace();
                     }

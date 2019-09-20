@@ -45,6 +45,11 @@ public interface DocumentDao {
     @Query("SELECT * FROM document WHERE id = :id")
     Flowable<Document> getByIdFlow(long id);
 
+    @Query("SELECT * FROM document WHERE id = :id")
+    LiveData<Document> getByIdLiveData(long id);
+
+    @Query("SELECT * FROM document WHERE id = :id")
+    Document getByIdDoc(long id);
 
     @Transaction
     @Query("SELECT * FROM document WHERE id = :id")

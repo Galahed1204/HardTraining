@@ -48,7 +48,7 @@ public class DataAdapterDocument extends RecyclerView.Adapter<DataAdapterDocumen
     @Override
     public void onBindViewHolder(DataAdapterDocument.ViewHolder holder, int position) {
         Document document = documents.get(position);
-        holder.nameView.setText(document.getNumber());
+        holder.nameView.setText(document.getKindOfTrainings());
         holder.dateView.setText(document.getDate());
 
 

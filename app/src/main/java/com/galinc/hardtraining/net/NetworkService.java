@@ -14,6 +14,8 @@ public class NetworkService {
     private Retrofit mRetrofit;
     public static final String GET_EXERCISES = "getexercises";
     public static final String GET_LISTOFTRAININGS = "getlistoftrainings";
+    public static final String GET_TAMPLATE = "gettemplate";
+
 
     private NetworkService(){
         OkHttpClient client = new OkHttpClient.Builder()

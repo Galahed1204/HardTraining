@@ -26,7 +26,15 @@ public class Document {
     @TypeConverters({ListTrainingsConverter.class})
     public List<ListTraining> listTrainings;
 
+    private String kindOfTrainings;
 
+    public String getKindOfTrainings() {
+        return kindOfTrainings;
+    }
+
+    public void setKindOfTrainings(String kindOfTrainings) {
+        this.kindOfTrainings = kindOfTrainings;
+    }
 
     public void setNumber(String number) {
         this.number = number;
