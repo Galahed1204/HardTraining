@@ -1,5 +1,6 @@
 package com.galinc.hardtraining.db;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -10,6 +11,8 @@ import com.galinc.hardtraining.itility.TemplateTraining;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 @Dao
 public interface TemplateDao {
@@ -22,6 +25,16 @@ public interface TemplateDao {
 
     @Query("SELECT name FROM TemplateTraining")
     List<String> getListName();
+
+    @Query("SELECT * FROM TemplateTraining")
+    LiveData<TemplateTraining> getAllLiveData();
+
+    @Query("SELECT * FROM TemplateTraining WHERE id = :id")
+    LiveData<TemplateTraining> getByIdLiveData(long id);
+
+    @Query("SELECT * FROM TemplateTraining WHERE id = :id")
+    Flowable<TemplateTraining> getByIdFlowable(long id);
+
 
     @Insert
     void insert(TemplateTraining TemplateTraining);
