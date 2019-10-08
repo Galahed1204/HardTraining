@@ -1,5 +1,6 @@
 package com.galinc.hardtraining.recyclerview;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,6 +38,16 @@ public class DataAdapterTraining extends RecyclerView.Adapter<DataAdapterTrainin
         holder.numberofitrView.setText(String.format(inflater.getContext().getResources().getString(R.string.itr_string),training.getNumberofitr()));
         holder.weightView.setText(String.format(inflater.getContext().getResources().getString(R.string.weight_string),training.getWeight()));
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long id = trainings.get(position).id;
+//                Intent intent = new Intent(inflater.getContext(), TrainingActivity.class);
+//                intent.putExtra("id",id);
+//                inflater.getContext().startActivity(intent);
+            }
+        });
 
     }
 
